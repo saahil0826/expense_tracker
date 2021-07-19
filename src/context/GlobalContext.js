@@ -12,9 +12,20 @@ const transactions = [
 const reducer = (state, action) => {
   switch (action.type) {
     case "ADD":
-     return [...state, action.payload];
+      return [...state, action.payload];
     case "REMOVE":
       return state.filter(item => item.id !== action.payload);
+    case "EDIT":
+      return state.map(item =>
+        item.id === action.payload.id
+          ? {
+              ...item,
+              text: action.payload.text,
+              amount: action.payload.amount
+            }
+          : item
+      );
+
     default:
       return state;
   }
@@ -36,9 +47,19 @@ export const GlobalProvider = ({ children }) => {
     dispatch({ type: "REMOVE", payload: id });
   };
 
+  const edit = (id, text, amount) => {
+    if (!isNaN(amount)) {
+      dispatch({ type: "EDIT", payload: { id, text, amount } }); //multiple payloads
+    } else {
+      alert(`${amount} is not a number`);
+    }
+  };
+
   return (
     //pass down the state from the Reducer not the initialState
-    <GlobalContext.Provider value={{ transactions:state, remove, addToDo }}>
+    <GlobalContext.Provider
+      value={{ transactions: state, remove, addToDo, edit }}
+    >
       {children}
     </GlobalContext.Provider>
   );

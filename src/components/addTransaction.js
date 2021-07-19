@@ -9,16 +9,22 @@ export const AddTransaction = () => {
   const [amount, setAmount] = useState("");
   const handleSubmit = e => {
     e.preventDefault();
-    if (text && text) {
-      const newItem = {
-        text: text,
-        amount: parseInt(amount), //take this as a number
-        id: uuidv4()
-      };
-      addToDo(newItem);
 
-      setText("");
-      setAmount("");
+    if (text && text) {
+      if (!isNaN(amount)) {
+        const newItem = {
+          text: text,
+          amount: parseInt(amount), //take this as a number
+          id: uuidv4()
+        };
+        addToDo(newItem);
+
+        setText("");
+        setAmount("");
+      } else {
+        alert(`${amount} is not a number`);
+      }
+
     } else {
       alert("enter both values.");
     }
