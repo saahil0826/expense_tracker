@@ -7,7 +7,7 @@ export const AddTransaction = () => {
   const { addToDo } = useContext(GlobalContext); //destructure props form the context
   const [text, setText] = useState("");
   const [amount, setAmount] = useState("");
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (text && text) {
@@ -15,7 +15,7 @@ export const AddTransaction = () => {
         const newItem = {
           text: text,
           amount: parseInt(amount), //take this as a number
-          id: uuidv4()
+          id: uuidv4(),
         };
         addToDo(newItem);
 
@@ -24,7 +24,6 @@ export const AddTransaction = () => {
       } else {
         alert(`${amount} is not a number`);
       }
-
     } else {
       alert("enter both values.");
     }
@@ -38,7 +37,7 @@ export const AddTransaction = () => {
         id="text"
         name="text"
         value={text}
-        onChange={e => setText(e.target.value)}
+        onChange={(e) => setText(e.target.value)}
       />
       <input
         type="text"
@@ -46,7 +45,7 @@ export const AddTransaction = () => {
         id="amount"
         name="amount"
         value={amount}
-        onChange={e => setAmount(e.target.value)}
+        onChange={(e) => setAmount(e.target.value)}
       />
       <button onClick={handleSubmit}>Submit!</button>
     </div>

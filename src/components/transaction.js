@@ -7,11 +7,10 @@ export const Transaction = ({ transaction }) => {
   const [amount, setAmount] = useState(transaction.amount);
   const [isEditing, setisEditing] = useState(false);
 
-
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-       edit(transaction.id, text, parseInt(amount));
-       setisEditing(!isEditing)
+    edit(transaction.id, text, parseInt(amount));
+    setisEditing(!isEditing);
   };
 
   return (
@@ -23,14 +22,14 @@ export const Transaction = ({ transaction }) => {
             id="text"
             name="text"
             value={text}
-            onChange={e => setText(e.target.value)}
+            onChange={(e) => setText(e.target.value)}
           />
           <input
             type="text"
             id="amount"
             name="amount"
             value={amount}
-            onChange={e => setAmount(e.target.value)}
+            onChange={(e) => setAmount(e.target.value)}
           />{" "}
           <button onClick={handleSubmit}>Submit!</button>
         </>
@@ -40,7 +39,7 @@ export const Transaction = ({ transaction }) => {
           <p
             style={{
               margin: "10px",
-              color: transaction.amount > 0 ? "green" : "red"
+              color: transaction.amount > 0 ? "green" : "red",
             }}
           >
             {transaction.amount}

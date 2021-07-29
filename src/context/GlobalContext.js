@@ -6,7 +6,7 @@ const transactions = [
   { id: uuidv4(), text: "Food", amount: -10 },
   { id: uuidv4(), text: "Compensation", amount: 100 },
   { id: uuidv4(), text: "Athletic monthly", amount: -5 },
-  { id: uuidv4(), text: "call options monthly", amount: 20 }
+  { id: uuidv4(), text: "call options monthly", amount: 20 },
 ];
 
 const reducer = (state, action) => {
@@ -14,14 +14,14 @@ const reducer = (state, action) => {
     case "ADD":
       return [...state, action.payload];
     case "REMOVE":
-      return state.filter(item => item.id !== action.payload);
+      return state.filter((item) => item.id !== action.payload);
     case "EDIT":
-      return state.map(item =>
+      return state.map((item) =>
         item.id === action.payload.id
           ? {
               ...item,
               text: action.payload.text,
-              amount: action.payload.amount
+              amount: action.payload.amount,
             }
           : item
       );
@@ -39,11 +39,11 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, transactions);
 
   //Actions
-  const addToDo = newItem => {
+  const addToDo = (newItem) => {
     dispatch({ type: "ADD", payload: newItem });
   };
 
-  const remove = id => {
+  const remove = (id) => {
     dispatch({ type: "REMOVE", payload: id });
   };
 
