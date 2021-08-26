@@ -2,21 +2,21 @@ const express = require("express");
 const dotenv = require("dotenv");
 const colors = require("colors");
 const morgan = require("morgan");
-
-dotenv.config({path: './config/config.env'});
-
-const transactions = require('./routes/transactions');
-
 const app = express();
 const PORT = process.env.PORT || 5000
 
-// routes
-// '/' => "HI there!" {root path}
-app.get("/", (req, res)=>
-  res.send('hello world')
-);
+dotenv.config({path: './config/config.env'});
 
-app.use('/api/v1/transactions', transactions);
+const transactionRoutes = require('./routes/transactions');
+
+// routes
+app.get("/", function (req, res) {
+  res.redirect("/api/v1/transactions");
+});
+
+
+
+app.use('/api/v1/transactions', transactionRoutes);
 
 
 app.get('*', function(req, res){
